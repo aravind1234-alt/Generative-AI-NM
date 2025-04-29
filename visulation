@@ -1,0 +1,104 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP3Z5L47MxN7Y499q2Ty+bU",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/aravind1234-alt/Generative-AI-NM/blob/main/visulation\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "# Import required libraries\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import requests\n",
+        "from bs4 import BeautifulSoup\n",
+        "\n",
+        "# Define the URL (example: Dettol product page)\n",
+        "url = \"https://www.dettol.co.in/products/antiseptic-liquid/\"\n",
+        "\n",
+        "# Send a request to the website\n",
+        "response = requests.get(url)\n",
+        "\n",
+        "# Check if the request is successful\n",
+        "if response.status_code == 200:\n",
+        "    # Parse HTML content\n",
+        "    soup = BeautifulSoup(response.text, \"html.parser\")\n",
+        "\n",
+        "    # Extract product name and description\n",
+        "    product_name = soup.find(\"h1\").text.strip()\n",
+        "    description = soup.find(\"p\").text.strip()\n",
+        "\n",
+        "    # Display extracted information\n",
+        "    print(f\"Product Name: {product_name}\")\n",
+        "    print(f\"Description: {description}\")\n",
+        "else:\n",
+        "    print(\"Failed to fetch data from the website\")\n",
+        "\n",
+        "# --- Example for CSV data (if you have product details) ---\n",
+        "\n",
+        "# Sample CSV data for Dettol product analysis (if available)\n",
+        "# Upload your CSV in Colab or use an external URL\n",
+        "# file_url = \"https://example.com/dettol_data.csv\"\n",
+        "# df = pd.read_csv(file_url)\n",
+        "\n",
+        "# Example DataFrame with sample data\n",
+        "data = {\n",
+        "    'Product': ['Dettol Liquid', 'Dettol Handwash', 'Dettol Soap', 'Dettol Wipes'],\n",
+        "    'Price (INR)': [120, 85, 45, 150],\n",
+        "    'Volume (ml/g)': [550, 200, 75, 80]\n",
+        "}\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# Show data\n",
+        "print(\"Dettol Product Data:\")\n",
+        "print(df)\n",
+        "\n",
+        "# --- Visualization: Price Distribution ---\n",
+        "plt.figure(figsize=(8, 5))\n",
+        "plt.bar(df['Product'], df['Price (INR)'], color='lightgreen')\n",
+        "plt.title('Dettol Product Price Comparison')\n",
+        "plt.xlabel('Product')\n",
+        "plt.ylabel('Price (INR)')\n",
+        "plt.xticks(rotation=45)\n",
+        "plt.show()\n",
+        "\n",
+        "# --- Visualization: Volume Distribution ---\n",
+        "plt.figure(figsize=(8, 5))\n",
+        "plt.bar(df['Product'], df['Volume (ml/g)'], color='orange')\n",
+        "plt.title('Dettol Product Volume Comparison')\n",
+        "plt.xlabel('Product')\n",
+        "plt.ylabel('Volume (ml/g)')\n",
+        "plt.xticks(rotation=45)\n",
+        "plt.show()"
+      ],
+      "metadata": {
+        "id": "8LW33e_Lyllz"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
